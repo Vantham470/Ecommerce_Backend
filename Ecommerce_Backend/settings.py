@@ -26,11 +26,7 @@ SECRET_KEY = 'django-insecure-ccm@ee$85s0ier(hapx86skbp#40$j_wr$n&1+s4wsxl2q704q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '192.168.100.93'
-]
+ALLOWED_HOSTS = ['*']  # Render assigns a dynamic domain; we'll tighten this after deploy
 
 
 # Application definition
@@ -125,3 +121,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+import os
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
