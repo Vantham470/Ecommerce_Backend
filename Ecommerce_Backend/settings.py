@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'Ecommerce_Backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
@@ -126,3 +126,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 import os
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+import pymysql
+pymysql.install_as_MySQLdb
