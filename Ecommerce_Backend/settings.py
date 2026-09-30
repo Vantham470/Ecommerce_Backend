@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'carts',
     'orders',
     'payments',
-    'rest_framework', 
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -55,9 +56,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
-ROOT_URLCONF = 'Ecommerce_Backend.urls'
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',  # Vite's default dev server port
+]
+
+ROOT_URLCONF = 'ecommerce_backend.urls'
 
 TEMPLATES = [
     {
@@ -74,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Ecommerce_Backend.wsgi.application'
+WSGI_APPLICATION = 'ecommerce_backend.wsgi.application'
 
 
 # Database
@@ -82,7 +89,7 @@ WSGI_APPLICATION = 'Ecommerce_Backend.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
+        default=f'sqlite:///{BASE_DIR}/db.sqlite3'
     )
 }
 
