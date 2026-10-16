@@ -5,6 +5,7 @@ from products.views import CategoryViewSet, ProductViewSet
 from carts.views import CartViewSet
 from orders.views import OrderViewSet
 from payments.views import PaymentViewSet
+from rest_framework.authtoken.views import obtain_auth_token
 
 router = DefaultRouter()
 router.register('categories', CategoryViewSet)
@@ -16,4 +17,5 @@ router.register('payments', PaymentViewSet, basename='payment')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/login/', obtain_auth_token),
 ]

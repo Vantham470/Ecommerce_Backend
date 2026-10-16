@@ -45,9 +45,11 @@ INSTALLED_APPS = [
     'payments',
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken',  # Add this line for token authentication
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,12 +58,20 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
 
+
+CORS_ALLOW_ALL_ORIGINS = False  # Allow all origins for development; tighten this in production
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',  # Vite's default dev server port
+    'https://ecommerce-frontend-xxxx.onrender.com', # My real URL, no trailing slash 
 ]
 
 ROOT_URLCONF = 'ecommerce_backend.urls'
@@ -109,6 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    
 ]
 
 
